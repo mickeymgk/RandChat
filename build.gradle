@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.heroku.sdk.heroku-gradle" version "2.0.0"
+    id 'de.schablinski.activejdbc-gradle-plugin' version '1.5.2'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //core
+    implementation 'org.telegram:telegrambots:4.9.1'
+    implementation 'org.telegram:telegrambotsextensions:4.9.1'
+    //database
+    implementation 'org.postgresql:postgresql:42.2.18.jre6'
+    implementation 'org.javalite:activejdbc:2.4-j8'
+    //emoji support
+    implementation 'com.vdurmont:emoji-java:5.1.1'
+
+    //test
+    testImplementation 'junit:junit:4.12'
+
+}
+
+application {
+    mainClassName = 'com.promo.scam.App'
+}
+
+project.configurations.implementation.setCanBeResolved(true)
+
+jar {
+    baseName = 'app'
+    version = '0.0.1'
+    manifest {
+        attributes(
+                'Main-Class': 'com.promo.scam.App',
+                'Class-Path': configurations.implementation.collect { it.getName() }.join(' ')
+        )
+    }
+    dependsOn ('dependencies')
+
+}
+
+distributions {
+    main {
+        contents {
+            into("lib") {
+                from(configurations.runtime)
+            }
+            from(jar)
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        }
+    }
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.implementation
+}
+
+task stage(dependsOn: ['copyToLib','build', 'clean'])
+build.mustRunAfter clean
