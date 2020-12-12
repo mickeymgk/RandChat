@@ -15,7 +15,7 @@ dependencies {
     //core
     implementation 'org.telegram:telegrambots:4.9.1'
     implementation 'org.telegram:telegrambotsextensions:4.9.1'
-    //database
+    //db
     implementation 'org.postgresql:postgresql:42.2.18.jre6'
     implementation 'org.javalite:activejdbc:2.4-j8'
     //emoji support
@@ -27,7 +27,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'com.promo.scam.App'
+    mainClassName = 'randchat.App'
 }
 
 project.configurations.implementation.setCanBeResolved(true)
@@ -37,7 +37,7 @@ jar {
     version = '0.0.1'
     manifest {
         attributes(
-                'Main-Class': 'com.promo.scam.App',
+                'Main-Class': 'randchat.App',
                 'Class-Path': configurations.implementation.collect { it.getName() }.join(' ')
         )
     }
