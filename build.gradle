@@ -13,8 +13,8 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //core
-    implementation 'org.telegram:telegrambots:4.9.1'
-    implementation 'org.telegram:telegrambotsextensions:4.9.1'
+    implementation 'org.telegram:telegrambots:6.3.0'//491
+    implementation 'org.telegram:telegrambotsextensions:6.3.0'
     //db
     implementation 'org.postgresql:postgresql:42.2.18.jre6'
     implementation 'org.javalite:activejdbc:2.4-j8'
