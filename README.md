@@ -10,6 +10,6 @@ The project is ready for deploying to heroku make sure to add heroku postgresql 
 - migrate to the newer telegram userID
 - allow user to chat with multiple users
 - location based matching system
-- more detailed profile imformation
+- more detailed profile information
 - user rating system
 - spam & abuse filter
